@@ -27,6 +27,7 @@ public class MainClient {
             enviarDados(msg);
             receberDados();
             socket.close();
+            // teste 
         }
     }
 
