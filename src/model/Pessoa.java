@@ -2,7 +2,7 @@ package model;
 
 /**
  *
- * @author fabio
+ * @author Fabio e Lucas Nogueira
  */
 public class Pessoa {
     private String nome;
@@ -33,7 +33,6 @@ public class Pessoa {
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
-    
-    
+      
     
 }

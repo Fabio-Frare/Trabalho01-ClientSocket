@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author fabio
+ * @author Fabio e Lucas Nogueira
  */
 public class Menu {
     private static  Scanner sc;
@@ -35,67 +35,52 @@ public class Menu {
                     msg = controllerEmpresa.inserirEmpresa();
                     System.out.println("mensagem controller.inserirEmpresa: " + msg);
                 }  
-//                menu();
                 break;
             case 2: // UPDATE
                 if (entidade == 1) {
-//                    msg = controllerPessoa.listarPessoas();
-//                    enviarDados(msg);
-//                    receberDados();
-//                    msg = controllerPessoa.atualizarPessoa();
-//                    enviarDados(msg);
-//                    receberDados();
+
                 }
                 if (entidade == 2) {
-//                    msg = controllerEmpresa.listarEmpresas();
-//                    enviarDados(msg);
-//                    receberDados();
-//                    msg = controllerEmpresa.atualizarEmpresa();
-//                    enviarDados(msg);
-//                    receberDados();
+
                 }
-//                menu();
                 break;
             case 3: // GET
                 if (entidade == 1) {
-//                    msg = controllerPessoa.buscarPessoaPorCpf();
-//                    enviarDados(msg);
-//                    receberDados(); // retorno da pessoa
+                    
                 }
                 if (entidade == 2) {
-//                    msg = controllerEmpresa.buscarEmpresaporCnpj();
-//                    enviarDados(msg);
-//                    receberDados();
+
                 }
 //                menu();
                 break;
             case 4: //DELETE
                 if (entidade == 1) {
-//                    msg = controllerPessoa.deletarPessoaPorCpf();
-//                    enviarDados(msg);
-//                    receberDados();
+
                 }
                 if (entidade == 2) {
-//                    msg = controllerEmpresa.deletarEmpresaporCnpj();
-//                    enviarDados(msg);
-//                    receberDados();
+
                 }
-//                menu();
                 break;
             case 5: //LIST
                 if (entidade == 1) {
-//                    msg = controllerPessoa.listarPessoas();
-//                    enviarDados(msg);
-//                    receberDados();
+                    msg = controllerPessoa.listarPessoas();
+                    System.out.println("mensagem controller.listarPessoa: " + msg);
                 }
                 if (entidade == 2) {
-//                    msg = controllerEmpresa.listarEmpresas();
-//                    enviarDados(msg);
-//                    receberDados();
+                    msg = controllerEmpresa.listarEmpresas();
+                    System.out.println("mensagem controller.listarEmpresas: " + msg);
                 }
-//                menu();
+                 if (entidade == 3) {
+                    msg = controllerEmpresa.listarTodos();
+                    System.out.println("mensagem controller.listarTodos: " + msg);
+                }
                 break;
-            case 6: // SAIR DA APLICAÇÃO
+            case 6: //VINCULAR
+                msg = controllerPessoa.vincularPessoa();                
+//                System.out.println("mensagem controller.vincular: " + msg);
+      
+                break;
+            case 7: // SAIR DA APLICAÇÃO
                 System.out.println("Você optou por sair da aplicação.");
                 sc.close();
                 System.exit(0);
@@ -116,7 +101,8 @@ public class Menu {
                 + "\n3 - Buscar"
                 + "\n4 - Deletar"
                 + "\n5 - Listar"
-                + "\n6 - sair");
+                + "\n6 - Vincular"
+                + "\n7 - sair");
         operacao = sc.nextInt();
 //        sc.close();
    } 
@@ -126,10 +112,12 @@ public class Menu {
             String[] operacoes = {"inserir", "atualizar", "buscar", "deletar", "listar"};
             System.out.println("Selecione a entidade que você deseja " + operacoes[operacao - 1] + ": "
                 + "\n1 - Pessoa"
-                + "\n2 - Empresa");
+                + "\n2 - Empresa"
+                + "\n3 - Todos");
             entidade = sc.nextInt();
-       }   
+       }  
 //       sc.close();
    }
+
     
 }

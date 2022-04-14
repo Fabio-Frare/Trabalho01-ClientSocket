@@ -2,12 +2,12 @@ package controller;
 
 import java.util.Scanner;
 import model.Empresa;
-import model.Pessoa;
+import org.json.simple.JSONObject;
 import utils.Utils;
 
 /**
  *
- * @author fabio
+ * @author Fabio e Lucas Nogueira
  */
 public class ControllerEmpresa {
     private String msg = "";
@@ -38,5 +38,24 @@ public class ControllerEmpresa {
         empresa.setCnpj(cnpj);
         
         return empresa;
+    }
+
+    public String listarEmpresas() {
+        JSONObject empresaJson = new JSONObject();  
+        empresaJson.put("operacao", "5");
+        empresaJson.put("entidade", "empresa");
+        msg = empresaJson.toJSONString();
+    
+        return msg;   
+    
+    }
+
+    public String listarTodos() {
+        JSONObject empresaJson = new JSONObject();  
+        empresaJson.put("operacao", "5");
+        empresaJson.put("entidade", "todos");
+        msg = empresaJson.toJSONString();
+    
+        return msg;
     }
 }

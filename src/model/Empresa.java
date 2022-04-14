@@ -1,11 +1,10 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
- * @author fabio
+ * @author Fabio e Lucas Nogueira
  */
 public class Empresa {
     private String nome;
@@ -13,13 +12,6 @@ public class Empresa {
     private int qtdeFuncionarios;
     private  List<Pessoa> pessoas; 
     
-
-//    public Empresa(String nome, String cnpj) {
-//        this.nome = nome;
-//        this.cnpj = cnpj;
-//        this.qtdeFuncionarios = 0;
-//        this.pessoas = new ArrayList<>();
-//    }
 
     public String getNome() {
         return nome;

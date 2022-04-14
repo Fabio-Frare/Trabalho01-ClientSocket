@@ -10,7 +10,7 @@ import view.Menu;
 
 /**
  *
- * @author fabio
+ * @author Fabio e Lucas Nogueira
  */
 public class MainClient {
     
@@ -24,8 +24,8 @@ public class MainClient {
         
         while (true) {
             String msg = menu.menuIniciar();
-            enviarDados(msg);
-            receberDados();
+            enviarDados(msg);            
+            receberDados();    
             socket.close();
         }
     }
