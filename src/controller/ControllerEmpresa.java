@@ -28,7 +28,7 @@ public class ControllerEmpresa {
     }
 
     private Empresa menuInserirEmpresa() {
-        in    = new Scanner(System.in);         
+        in = new Scanner(System.in);         
         System.out.println("Favor informar o nome da empresa: ");
         String nomeEmpresa = in.nextLine();
         empresa.setNome(nomeEmpresa);
@@ -46,8 +46,7 @@ public class ControllerEmpresa {
         empresaJson.put("entidade", "empresa");
         msg = empresaJson.toJSONString();
     
-        return msg;   
-    
+        return msg;  
     }
 
     public String listarTodos() {
