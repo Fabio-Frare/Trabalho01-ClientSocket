@@ -14,8 +14,6 @@ public class ControllerEmpresa {
     Empresa empresa;
     Utils utils;
     Scanner in;  
-    
-
 
     public String inserirEmpresa() {
         empresa = new Empresa();
@@ -24,10 +22,7 @@ public class ControllerEmpresa {
         msg     = utils.converteEmpresaToJson(empresa, "1");   
         
         return msg;
-    
     }
-
-  
 
     public String listarEmpresas() {
         JSONObject empresaJson = new JSONObject();  
@@ -77,6 +72,17 @@ public class ControllerEmpresa {
         empresa.setCnpj(cnpj);
         
         return empresa;
+    }
+
+    public String deletarEmpresa() {
+        String cnpjEmpresa = menuBuscarEmpresa();
+        JSONObject empresaJson = new JSONObject();  
+        empresaJson.put("operacao", "4");
+        empresaJson.put("entidade", "empresa");
+        empresaJson.put("cnpj", cnpjEmpresa);
+        msg = empresaJson.toJSONString();
+    
+        return msg;
     }
     
     

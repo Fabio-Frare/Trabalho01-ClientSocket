@@ -29,11 +29,11 @@ public class Menu {
             case 1: // INSERT
                 if (entidade == 1) {
                     msg = controllerPessoa.inserirPessoa();
-                    System.out.println("mensagem controller.inserirPessoa: " + msg);
+//                    System.out.println("mensagem controller.inserirPessoa: " + msg);
                 }
                 if (entidade == 2) {
                     msg = controllerEmpresa.inserirEmpresa();
-                    System.out.println("mensagem controller.inserirEmpresa: " + msg);
+//                    System.out.println("mensagem controller.inserirEmpresa: " + msg);
                 }  
                 break;
             case 2: // UPDATE
@@ -47,12 +47,11 @@ public class Menu {
             case 3: // GET
                 if (entidade == 1) {
                     msg = controllerPessoa.buscarPessoa();
-                    System.out.println("mensagem controller.buscarPessoa: " + msg);
+//                    System.out.println("mensagem controller.buscarPessoa: " + msg);
                 }
                 if (entidade == 2) {
                     msg = controllerEmpresa.buscarEmpresa();
-                    System.out.println("mensagem controller.buscarEmpresa: " + msg);
-                    
+//                    System.out.println("mensagem controller.buscarEmpresa: " + msg);
                 }
                 break;
             case 4: //DELETE
@@ -60,17 +59,18 @@ public class Menu {
 
                 }
                 if (entidade == 2) {
-
+                    msg = controllerEmpresa.deletarEmpresa();
+//                  System.out.println("mensagem controller.deletarEmpresa: " + msg);
                 }
                 break;
             case 5: //LIST
                 if (entidade == 1) {
                     msg = controllerPessoa.listarPessoas();
-                    System.out.println("mensagem controller.listarPessoa: " + msg);
+//                    System.out.println("mensagem controller.listarPessoa: " + msg);
                 }
                 if (entidade == 2) {
                     msg = controllerEmpresa.listarEmpresas();
-                    System.out.println("mensagem controller.listarEmpresas: " + msg);
+//                    System.out.println("mensagem controller.listarEmpresas: " + msg);
                 }
                  if (entidade == 3) {
                     msg = controllerEmpresa.listarTodos();
