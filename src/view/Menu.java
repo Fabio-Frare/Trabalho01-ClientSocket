@@ -46,12 +46,14 @@ public class Menu {
                 break;
             case 3: // GET
                 if (entidade == 1) {
-                    
+//                    msg = controllerPessoa.inserirPessoa();
+//                    System.out.println("mensagem controller.inserirPessoa: " + msg);
                 }
                 if (entidade == 2) {
-
+                    msg = controllerEmpresa.buscarEmpresa();
+                    System.out.println("mensagem controller.buscarEmpresa: " + msg);
+                    
                 }
-//                menu();
                 break;
             case 4: //DELETE
                 if (entidade == 1) {

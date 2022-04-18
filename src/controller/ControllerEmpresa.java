@@ -27,18 +27,7 @@ public class ControllerEmpresa {
     
     }
 
-    private Empresa menuInserirEmpresa() {
-        in = new Scanner(System.in);         
-        System.out.println("Favor informar o nome da empresa: ");
-        String nomeEmpresa = in.nextLine();
-        empresa.setNome(nomeEmpresa);
-
-        System.out.println("Favor informar o CNPJ: ");
-        String cnpj = in.nextLine();
-        empresa.setCnpj(cnpj);
-        
-        return empresa;
-    }
+  
 
     public String listarEmpresas() {
         JSONObject empresaJson = new JSONObject();  
@@ -57,4 +46,37 @@ public class ControllerEmpresa {
     
         return msg;
     }
+    
+    public String buscarEmpresa() {
+        String cnpjEmpresa = menuBuscarEmpresa();
+        JSONObject empresaJson = new JSONObject();  
+        empresaJson.put("operacao", "3");
+        empresaJson.put("entidade", "empresa");
+        empresaJson.put("cnpj", cnpjEmpresa);
+        msg = empresaJson.toJSONString();
+    
+        return msg;    
+    }
+    
+    private Empresa menuInserirEmpresa() {
+        in = new Scanner(System.in);         
+        System.out.println("Favor informar o nome da empresa: ");
+        String nomeEmpresa = in.nextLine();
+        empresa.setNome(nomeEmpresa);
+
+        System.out.println("Favor informar o CNPJ: ");
+        String cnpj = in.nextLine();
+        empresa.setCnpj(cnpj);
+        
+        return empresa;
+    }
+    
+    private String menuBuscarEmpresa() {  
+        in = new Scanner(System.in);  
+        System.out.println("Favor informar o CNPJ da empresa:");
+        msg = in.nextLine();        
+        
+        return msg;
+    }
+      
 }
