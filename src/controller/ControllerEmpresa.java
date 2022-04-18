@@ -58,6 +58,14 @@ public class ControllerEmpresa {
         return msg;    
     }
     
+    private String menuBuscarEmpresa() {  
+        in = new Scanner(System.in);  
+        System.out.println("Favor informar o CNPJ da empresa:");
+        msg = in.nextLine();        
+        
+        return msg;
+    }
+    
     private Empresa menuInserirEmpresa() {
         in = new Scanner(System.in);         
         System.out.println("Favor informar o nome da empresa: ");
@@ -71,12 +79,5 @@ public class ControllerEmpresa {
         return empresa;
     }
     
-    private String menuBuscarEmpresa() {  
-        in = new Scanner(System.in);  
-        System.out.println("Favor informar o CNPJ da empresa:");
-        msg = in.nextLine();        
-        
-        return msg;
-    }
-      
+    
 }

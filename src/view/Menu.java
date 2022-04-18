@@ -46,8 +46,8 @@ public class Menu {
                 break;
             case 3: // GET
                 if (entidade == 1) {
-//                    msg = controllerPessoa.inserirPessoa();
-//                    System.out.println("mensagem controller.inserirPessoa: " + msg);
+                    msg = controllerPessoa.buscarPessoa();
+                    System.out.println("mensagem controller.buscarPessoa: " + msg);
                 }
                 if (entidade == 2) {
                     msg = controllerEmpresa.buscarEmpresa();

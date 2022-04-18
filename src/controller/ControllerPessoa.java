@@ -59,6 +59,25 @@ public class ControllerPessoa {
         return msg;    
     }
 
+    public String buscarPessoa() {
+        String cpfPessoa = menuBuscarPessoa();
+        JSONObject empresaJson = new JSONObject();  
+        empresaJson.put("operacao", "3");
+        empresaJson.put("entidade", "pessoa");
+        empresaJson.put("cpf", cpfPessoa);
+        msg = empresaJson.toJSONString();
+    
+        return msg; 
+    }
+
+    private String menuBuscarPessoa() {
+        in = new Scanner(System.in);  
+        System.out.println("Favor informar o CPF da pessoa:");
+        msg = in.nextLine();        
+        
+        return msg;
+    }
+
     
 
     
