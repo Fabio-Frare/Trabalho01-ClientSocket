@@ -56,7 +56,8 @@ public class Menu {
                 break;
             case 4: //DELETE
                 if (entidade == 1) {
-
+                    msg = controllerPessoa.deletarPessoa();
+//                  System.out.println("mensagem controller.deletarPessoa: " + msg);
                 }
                 if (entidade == 2) {
                     msg = controllerEmpresa.deletarEmpresa();

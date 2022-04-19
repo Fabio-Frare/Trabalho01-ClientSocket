@@ -78,6 +78,17 @@ public class ControllerPessoa {
         return msg;
     }
 
+    public String deletarPessoa() {
+        String cpfPessoa = menuBuscarPessoa();
+        JSONObject pessoaJson = new JSONObject();  
+        pessoaJson.put("operacao", "4");
+        pessoaJson.put("entidade", "pessoa");
+        pessoaJson.put("cpf", cpfPessoa);
+        msg = pessoaJson.toJSONString();
+    
+        return msg;     
+    }
+
     
 
     
