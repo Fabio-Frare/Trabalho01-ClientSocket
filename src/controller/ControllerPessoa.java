@@ -89,7 +89,31 @@ public class ControllerPessoa {
         return msg;     
     }
 
-    
+    public String atualizaPessoa() {        
+        pessoa = new Pessoa();
+        utils  = new Utils();
+        pessoa = menuAtualizaPessoa();
+        msg    = utils.convertePessoaToJson(pessoa, "2"); 
+        
+        return msg;
+    }
 
+    private Pessoa menuAtualizaPessoa() {
+         in    = new Scanner(System.in); 
+        
+        System.out.println("Favor informar o CPF: ");
+        String cpf = in.nextLine();
+        pessoa.setCpf(cpf);
+        
+        System.out.println("Favor informar o nome da pessoa: ");
+        String nomePessoa = in.nextLine();
+        pessoa.setNome(nomePessoa);
+
+        System.out.println("Favor informar o endereço: ");
+        String enderecoPessoa = in.nextLine();
+        pessoa.setEndereco(enderecoPessoa);
+
+        return pessoa;  
+    }
     
 }

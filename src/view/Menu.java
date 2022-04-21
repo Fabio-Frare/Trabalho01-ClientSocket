@@ -38,17 +38,10 @@ public class Menu {
                 break;
             case 2: // UPDATE
                 if (entidade == 1) {
-
+                    msg = controllerPessoa.atualizaPessoa();
                 }
                 if (entidade == 2) {
                     msg = controllerEmpresa.atualizaEmpresa();
-                    
-                   
-                    
-                    
-                    
-                    
-                    
                 }
                 break;
             case 3: // GET
