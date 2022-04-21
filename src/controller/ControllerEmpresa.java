@@ -73,6 +73,19 @@ public class ControllerEmpresa {
         
         return empresa;
     }
+    
+    private Empresa menuAtualizaEmpresa() {
+        in = new Scanner(System.in);   
+        System.out.println("Favor informar o CNPJ da empresa: ");
+        String cnpj = in.nextLine();
+        empresa.setCnpj(cnpj);
+        
+        System.out.println("Favor informar o nome da empresa: ");
+        String nomeEmpresa = in.nextLine();
+        empresa.setNome(nomeEmpresa);
+        
+        return empresa; 
+    }
 
     public String deletarEmpresa() {
         String cnpjEmpresa = menuBuscarEmpresa();
@@ -84,6 +97,17 @@ public class ControllerEmpresa {
     
         return msg;
     }
+
+    public String atualizaEmpresa() {
+        empresa = new Empresa();
+        utils   = new Utils();
+        empresa = menuAtualizaEmpresa();
+        msg     = utils.converteEmpresaToJson(empresa, "2");   
+        
+        return msg;
+    }
+
+
     
     
 }

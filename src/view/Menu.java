@@ -41,7 +41,14 @@ public class Menu {
 
                 }
                 if (entidade == 2) {
-
+                    msg = controllerEmpresa.atualizaEmpresa();
+                    
+                   
+                    
+                    
+                    
+                    
+                    
                 }
                 break;
             case 3: // GET
