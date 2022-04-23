@@ -106,6 +106,15 @@ public class ControllerPessoa {
         empresaJson.put("operacao", "5");
         empresaJson.put("entidade", "pessoa");
         msg = empresaJson.toJSONString();
+        
+        try {
+            SocketSpeaker ss = new SocketSpeaker(msg);
+            String resposta  = ss.call();
+            
+            System.out.println(resposta);
+        } catch (IOException ex) {
+            Logger.getLogger(ControllerPessoa.class.getName()).log(Level.SEVERE, null, ex);
+        }
     
         return msg;    
     }
