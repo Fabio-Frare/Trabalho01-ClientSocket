@@ -28,7 +28,7 @@ public class Menu {
         switch (operacao) {
             case 1: // INSERT
                 if (entidade == 1) {
-                    msg = controllerPessoa.inserirPessoa();
+                    controllerPessoa.inserirPessoa();
 //                    System.out.println("mensagem controller.inserirPessoa: " + msg);
                 }
                 if (entidade == 2) {
@@ -79,7 +79,7 @@ public class Menu {
                 }
                 break;
             case 6: //VINCULAR
-                msg = controllerPessoa.vincularPessoa();                
+//                msg = controllerPessoa.vincularPessoa();                
 //                System.out.println("mensagem controller.vincular: " + msg);
       
                 break;

@@ -1,8 +1,12 @@
 package controller;
 
+import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Empresa;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
 import utils.Utils;
 
 /**
@@ -15,6 +19,10 @@ public class ControllerEmpresa {
     Utils utils;
     Scanner in;  
 
+    public ControllerEmpresa() {
+        utils   = new Utils();
+    }
+    
     public String inserirEmpresa() {
         empresa = new Empresa();
         utils   = new Utils();
@@ -107,7 +115,25 @@ public class ControllerEmpresa {
         return msg;
     }
 
+    public String getMenuEmpresaByMsg(String msg){
+        String menu = "";
+        
+        try {
+            List<Empresa> listaEmpresa = utils.converteJsonToEmpresas(msg);
+            menu = "Menu Empresa \n";
 
-    
-    
+            for(int i = 0; i < listaEmpresa.size(); i++){
+                Empresa empresa = listaEmpresa.get(i);
+                int k = i+1;
+
+                menu += k + ". - Nome: " + empresa.getNome() + "\n";
+                menu +=     "     Cnpj: " + empresa.getCnpj() + "\n";
+                menu +=     "     Qtde Funcionarios: " + empresa.getQtdeFuncionarios()+ "\n";
+            }
+        } catch (ParseException ex) {
+            Logger.getLogger(ControllerEmpresa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return menu;
+    }
 }

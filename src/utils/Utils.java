@@ -1,5 +1,7 @@
 package utils;
 
+import java.util.ArrayList;
+import java.util.List;
 import model.Empresa;
 import model.Pessoa;
 import org.json.simple.JSONObject;
@@ -85,6 +87,29 @@ public class Utils {
 //        System.out.println("Entidade controller: " + entidade);
         
         return entidade;
+    }
+    
+    public String retornaOperacaoToJson(String operacao){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("operacao", operacao);
+        String jsonOperacao = jsonObject.toJSONString();
+        
+        return jsonOperacao;
+    }
+
+    public List<Empresa> converteJsonToEmpresas(String msg) throws ParseException {
+        List<Empresa> listaEmpresa = new ArrayList<>();
+        JSONParser    parser       = new JSONParser();
+        JSONObject    json         = (JSONObject) parser.parse(msg);
+        
+        for(int i = 0; i < json.size(); i++){
+            String sEmpresa = json.get(String.valueOf(i)).toString();
+            Empresa empresa = converteJsonToEmpresa(sEmpresa);
+
+            listaEmpresa.add(empresa);
+        }
+        
+        return listaEmpresa;
     }
     
 }

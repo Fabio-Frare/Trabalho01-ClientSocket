@@ -1,8 +1,12 @@
 package controller;
 
+import java.io.IOException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Pessoa;
 import org.json.simple.JSONObject;
+import utils.SocketSpeaker;
 import utils.Utils;
 
 /**
@@ -16,11 +20,25 @@ public class ControllerPessoa {
     Scanner in;       
 
     public String inserirPessoa() {
+        Pessoa p = executaInsercaoPessoa();
+        vinculaPessoaEmpresa(p);
+        return "";
+    }
+    
+    private Pessoa executaInsercaoPessoa(){
         pessoa = new Pessoa();
         utils  = new Utils();
         pessoa = menuInserirPessoa();
-        msg    = utils.convertePessoaToJson(pessoa, "1");        
-        return msg;
+        msg    = utils.convertePessoaToJson(pessoa, "1");
+        
+        try {
+            SocketSpeaker ss = new SocketSpeaker(msg);
+            ss.call();
+        } catch (IOException ex) {
+            Logger.getLogger(ControllerPessoa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return pessoa;
     }
     
     private Pessoa menuInserirPessoa() {
@@ -39,15 +57,48 @@ public class ControllerPessoa {
         pessoa.setEndereco(enderecoPessoa);
 
         return pessoa;
-    } 
+    }
+    
+    private void vinculaPessoaEmpresa(Pessoa pessoa){
+        Scanner in = new Scanner(System.in); 
+        System.out.println("Deseja vincular a pessoa a uma empresa? [s/n]");
+        String opcao = in.nextLine();
+        if(opcao.equalsIgnoreCase("s")){
+            ControllerEmpresa controlEmpresa = new ControllerEmpresa();
+            String msgListaEmpresa           = controlEmpresa.listarEmpresas();
+            
+            try {
+                SocketSpeaker ss   = new SocketSpeaker(msgListaEmpresa);
+                String resposta    = ss.call();
+                String menuEmpresa = controlEmpresa.getMenuEmpresaByMsg(resposta);
+                
+                System.out.println("Escolha uma empresa digitando o seu cnpj");
+                System.out.println(menuEmpresa);
+                String cnpjEmpresa = in.nextLine();
+                System.out.println(vincularPessoa(pessoa.getCpf(), cnpjEmpresa));
+            } catch (IOException ex) {
+                Logger.getLogger(ControllerPessoa.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 
-    public String vincularPessoa() {        
+    public String vincularPessoa(String cpfPessoa, String cnpjEmpresa) {        
         JSONObject empresaJson = new JSONObject();  
         empresaJson.put("operacao", "6");
-        empresaJson.put("entidade", "empresa");
+        empresaJson.put("entidade", "pessoa");
+        empresaJson.put("cpf"     , cpfPessoa);
+        empresaJson.put("cnpj"    , cnpjEmpresa);
         msg = empresaJson.toJSONString();
+        String resposta = "";
         
-        return msg;
+        try {
+            SocketSpeaker ss = new SocketSpeaker(msg);
+            resposta         = ss.call();
+        } catch (IOException ex) {
+            Logger.getLogger(ControllerPessoa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return resposta;
     }
 
     public String listarPessoas() {
