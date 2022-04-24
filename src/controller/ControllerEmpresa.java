@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -7,6 +8,7 @@ import java.util.logging.Logger;
 import model.Empresa;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
+import utils.SocketSpeaker;
 import utils.Utils;
 
 /**
@@ -37,6 +39,24 @@ public class ControllerEmpresa {
         empresaJson.put("operacao", "5");
         empresaJson.put("entidade", "empresa");
         msg = empresaJson.toJSONString();
+        
+        try {
+            SocketSpeaker ss = new SocketSpeaker(msg);
+            String resposta  = ss.call();
+            
+            System.out.println(resposta);
+        } catch (IOException ex) {
+            Logger.getLogger(ControllerPessoa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return "";  
+    }
+
+    public String listarEmpresasMsg() {
+        JSONObject empresaJson = new JSONObject();  
+        empresaJson.put("operacao", "5");
+        empresaJson.put("entidade", "empresa");
+        msg = empresaJson.toJSONString();
     
         return msg;  
     }
@@ -46,8 +66,17 @@ public class ControllerEmpresa {
         empresaJson.put("operacao", "5");
         empresaJson.put("entidade", "todos");
         msg = empresaJson.toJSONString();
+        
+        try {
+            SocketSpeaker ss = new SocketSpeaker(msg);
+            String resposta = ss.call();
+            
+            System.out.println(resposta);
+        } catch (IOException ex) {
+            Logger.getLogger(ControllerEmpresa.class.getName()).log(Level.SEVERE, null, ex);
+        }
     
-        return msg;
+        return "";
     }
     
     public String buscarEmpresa() {

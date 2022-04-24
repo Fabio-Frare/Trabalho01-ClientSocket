@@ -65,7 +65,7 @@ public class ControllerPessoa {
         String opcao = in.nextLine();
         if(opcao.equalsIgnoreCase("s")){
             ControllerEmpresa controlEmpresa = new ControllerEmpresa();
-            String msgListaEmpresa           = controlEmpresa.listarEmpresas();
+            String msgListaEmpresa           = controlEmpresa.listarEmpresasMsg();
             
             try {
                 SocketSpeaker ss   = new SocketSpeaker(msgListaEmpresa);
@@ -102,10 +102,10 @@ public class ControllerPessoa {
     }
 
     public String listarPessoas() {
-        JSONObject empresaJson = new JSONObject();  
-        empresaJson.put("operacao", "5");
-        empresaJson.put("entidade", "pessoa");
-        msg = empresaJson.toJSONString();
+        JSONObject pessoaJson = new JSONObject();  
+        pessoaJson.put("operacao", "5");
+        pessoaJson.put("entidade", "pessoa");
+        msg = pessoaJson.toJSONString();
         
         try {
             SocketSpeaker ss = new SocketSpeaker(msg);
@@ -149,13 +149,34 @@ public class ControllerPessoa {
         return msg;     
     }
 
-    public String atualizaPessoa() {        
-        pessoa = new Pessoa();
-        utils  = new Utils();
-        pessoa = menuAtualizaPessoa();
-        msg    = utils.convertePessoaToJson(pessoa, "2"); 
+    public String atualizaPessoa() {
+        pessoa = executaAtualizacaoPessoa();
+        if(pessoa.getCpf() != null){
+            vinculaPessoaEmpresa(pessoa);
+        }
         
-        return msg;
+        return "";
+    }
+    
+    private Pessoa executaAtualizacaoPessoa(){
+        pessoa = new Pessoa();
+        pessoa = menuAtualizaPessoa();
+        utils  = new Utils();
+        msg    = utils.convertePessoaToJson(pessoa, "2");
+        
+        try {
+            SocketSpeaker ss = new SocketSpeaker(msg);
+            String resposta  = ss.call();
+            
+            System.out.println(resposta);
+            if(!resposta.equalsIgnoreCase("Pessoa com o CPF: " + pessoa.getCpf() + " atualizada.")){
+                pessoa = new Pessoa();
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(ControllerPessoa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return pessoa;
     }
 
     private Pessoa menuAtualizaPessoa() {
