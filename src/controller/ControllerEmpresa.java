@@ -25,20 +25,11 @@ public class ControllerEmpresa {
         utils   = new Utils();
     }
     
-    public String inserirEmpresa() {
+    public void inserirEmpresa() {
         empresa = new Empresa();
         utils   = new Utils();
         empresa = menuInserirEmpresa();
-        msg     = utils.converteEmpresaToJson(empresa, "1");   
-        
-        return msg;
-    }
-
-    public String listarEmpresas() {
-        JSONObject empresaJson = new JSONObject();  
-        empresaJson.put("operacao", "5");
-        empresaJson.put("entidade", "empresa");
-        msg = empresaJson.toJSONString();
+        msg     = utils.converteEmpresaToJson(empresa, "1");
         
         try {
             SocketSpeaker ss = new SocketSpeaker(msg);
@@ -48,8 +39,18 @@ public class ControllerEmpresa {
         } catch (IOException ex) {
             Logger.getLogger(ControllerPessoa.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        return "";  
+    }
+
+    public void listarEmpresas() {
+        String msg = listarEmpresasMsg();
+        try {
+            SocketSpeaker ss = new SocketSpeaker(msg);
+            String resposta  = ss.call();
+            
+            System.out.println(resposta);
+        } catch (IOException ex) {
+            Logger.getLogger(ControllerPessoa.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public String listarEmpresasMsg() {
@@ -79,15 +80,22 @@ public class ControllerEmpresa {
         return "";
     }
     
-    public String buscarEmpresa() {
+    public void buscarEmpresa() {
         String cnpjEmpresa = menuBuscarEmpresa();
         JSONObject empresaJson = new JSONObject();  
         empresaJson.put("operacao", "3");
         empresaJson.put("entidade", "empresa");
         empresaJson.put("cnpj", cnpjEmpresa);
         msg = empresaJson.toJSONString();
-    
-        return msg;    
+        
+        try {
+            SocketSpeaker ss = new SocketSpeaker(msg);
+            String resposta = ss.call();
+            
+            System.out.println(resposta);
+        } catch (IOException ex) {
+            Logger.getLogger(ControllerEmpresa.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     private String menuBuscarEmpresa() {  
@@ -124,24 +132,38 @@ public class ControllerEmpresa {
         return empresa; 
     }
 
-    public String deletarEmpresa() {
+    public void deletarEmpresa() {
         String cnpjEmpresa = menuBuscarEmpresa();
         JSONObject empresaJson = new JSONObject();  
         empresaJson.put("operacao", "4");
         empresaJson.put("entidade", "empresa");
         empresaJson.put("cnpj", cnpjEmpresa);
         msg = empresaJson.toJSONString();
-    
-        return msg;
+        
+        try {
+            SocketSpeaker ss = new SocketSpeaker(msg);
+            String resposta = ss.call();
+            
+            System.out.println(resposta);
+        } catch (IOException ex) {
+            Logger.getLogger(ControllerEmpresa.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    public String atualizaEmpresa() {
+    public void atualizaEmpresa() {
         empresa = new Empresa();
         utils   = new Utils();
         empresa = menuAtualizaEmpresa();
-        msg     = utils.converteEmpresaToJson(empresa, "2");   
+        msg     = utils.converteEmpresaToJson(empresa, "2");
         
-        return msg;
+        try {
+            SocketSpeaker ss = new SocketSpeaker(msg);
+            String resposta = ss.call();
+            
+            System.out.println(resposta);
+        } catch (IOException ex) {
+            Logger.getLogger(ControllerEmpresa.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public String getMenuEmpresaByMsg(String msg){

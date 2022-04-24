@@ -19,10 +19,9 @@ public class ControllerPessoa {
     private Utils utils;
     Scanner in;       
 
-    public String inserirPessoa() {
+    public void inserirPessoa() {
         Pessoa p = executaInsercaoPessoa();
         vinculaPessoaEmpresa(p);
-        return "";
     }
     
     private Pessoa executaInsercaoPessoa(){
@@ -101,7 +100,7 @@ public class ControllerPessoa {
         return resposta;
     }
 
-    public String listarPessoas() {
+    public void listarPessoas() {
         JSONObject pessoaJson = new JSONObject();  
         pessoaJson.put("operacao", "5");
         pessoaJson.put("entidade", "pessoa");
@@ -115,11 +114,9 @@ public class ControllerPessoa {
         } catch (IOException ex) {
             Logger.getLogger(ControllerPessoa.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
-        return msg;    
     }
 
-    public String buscarPessoa() {
+    public void buscarPessoa() {
         String cpfPessoa = menuBuscarPessoa();
         JSONObject empresaJson = new JSONObject();  
         empresaJson.put("operacao", "3");
@@ -135,8 +132,6 @@ public class ControllerPessoa {
         } catch (IOException ex) {
             Logger.getLogger(ControllerPessoa.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
-        return ""; 
     }
 
     private String menuBuscarPessoa() {
@@ -147,7 +142,7 @@ public class ControllerPessoa {
         return msg;
     }
 
-    public String deletarPessoa() {
+    public void deletarPessoa() {
         String cpfPessoa = menuBuscarPessoa();
         JSONObject pessoaJson = new JSONObject();  
         pessoaJson.put("operacao", "4");
@@ -163,17 +158,13 @@ public class ControllerPessoa {
         } catch (IOException ex) {
             Logger.getLogger(ControllerPessoa.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
-        return "";     
     }
 
-    public String atualizaPessoa() {
+    public void atualizaPessoa() {
         pessoa = executaAtualizacaoPessoa();
         if(pessoa.getCpf() != null){
             vinculaPessoaEmpresa(pessoa);
         }
-        
-        return "";
     }
     
     private Pessoa executaAtualizacaoPessoa(){
