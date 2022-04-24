@@ -126,8 +126,17 @@ public class ControllerPessoa {
         empresaJson.put("entidade", "pessoa");
         empresaJson.put("cpf", cpfPessoa);
         msg = empresaJson.toJSONString();
+        
+        try {
+            SocketSpeaker ss = new SocketSpeaker(msg);
+            String resposta  = ss.call();
+            
+            System.out.println(resposta);
+        } catch (IOException ex) {
+            Logger.getLogger(ControllerPessoa.class.getName()).log(Level.SEVERE, null, ex);
+        }
     
-        return msg; 
+        return ""; 
     }
 
     private String menuBuscarPessoa() {
@@ -145,8 +154,17 @@ public class ControllerPessoa {
         pessoaJson.put("entidade", "pessoa");
         pessoaJson.put("cpf", cpfPessoa);
         msg = pessoaJson.toJSONString();
+        
+        try {
+            SocketSpeaker ss = new SocketSpeaker(msg);
+            String resposta  = ss.call();
+            
+            System.out.println(resposta);
+        } catch (IOException ex) {
+            Logger.getLogger(ControllerPessoa.class.getName()).log(Level.SEVERE, null, ex);
+        }
     
-        return msg;     
+        return "";     
     }
 
     public String atualizaPessoa() {
