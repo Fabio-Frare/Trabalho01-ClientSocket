@@ -5,25 +5,49 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Responsavel por realizar o socket
  *
- * @author Lucas Nogueira
+ * @author Fabio e Lucas Nogueira
  */
 public class SocketSpeaker {
     
-    private static final String ADDRESS = "127.0.0.1";
-    private static final int PORT       = 9876;
+    private static String ADDRESS;
+    private static int PORT;
     private static Socket socket;
     private String msg;
+    
+    private static SocketSpeaker ss;
 
-    public SocketSpeaker(String msg) throws IOException {
-        socket = new Socket(ADDRESS, PORT);
+    private SocketSpeaker() throws IOException {}
+    
+    public static SocketSpeaker getInstance(){
+        if(ss == null){
+            try {
+                ss = new SocketSpeaker();
+            } catch (IOException ex) {
+                Logger.getLogger(SocketSpeaker.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        return ss;
+    }
+    
+    public void init(String address, int port){
+        ADDRESS = address;
+        PORT    = port;
+    }
+    
+    public void setMensagem(String msg){
         this.msg = msg;
     }
     
     public String call() throws IOException{
+        socket = new Socket(ADDRESS, PORT);
+        
         enviarDados();
         String res = receberDados();
         socket.close();

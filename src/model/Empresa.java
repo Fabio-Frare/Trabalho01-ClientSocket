@@ -14,7 +14,7 @@ public class Empresa {
     private  List<Pessoa> pessoas  = new ArrayList<>();
 
     public Empresa() {
-        this.qtdeFuncionarios = 0;
+        this.qtdeFuncionarios = pessoas.size();
     }
 
     public String getNome() {
@@ -36,10 +36,6 @@ public class Empresa {
     public int getQtdeFuncionarios() {
         return pessoas.size();
     }
-
-//    public void setQtdeFuncionarios(int qtdeFuncionarios) {
-//        this.qtdeFuncionarios = qtdeFuncionarios;
-//    }
 
     public List<Pessoa> getPessoas() {
         return pessoas;
@@ -65,7 +61,7 @@ public class Empresa {
         return "Empresa: " +
                 "Nome: " + nome + 
                 " CNPJ: " + cnpj + 
-                " Qtde de Funcionários: " + pessoas.size()
+                " Qtde de Funcionários: " + qtdeFuncionarios
                 + "\nPessoas:\n" + 
                 listaPessoas();
     }

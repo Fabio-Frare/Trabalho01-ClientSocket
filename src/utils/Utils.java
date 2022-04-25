@@ -36,20 +36,20 @@ public class Utils {
         pessoa.setCpf((String) json.get("cpf"));
         pessoa.setEndereco((String) json.get("endereco"));
         
-//        System.out.println("teste converteJsonToPessoa: " + pessoa.getNome());        
         return pessoa;        
 
     }
-       public String converteEmpresaToJson (Empresa empresa, String operacao) {
-        
-        JSONObject empresaJson = new JSONObject();  
-        empresaJson.put("operacao", operacao);
-        empresaJson.put("entidade", "empresa");
-        empresaJson.put("nome"    , empresa.getNome());
-        empresaJson.put("cnpj"     , empresa.getCnpj());      
 
-        return empresaJson.toJSONString();
-    }
+    public String converteEmpresaToJson (Empresa empresa, String operacao) {
+
+     JSONObject empresaJson = new JSONObject();  
+     empresaJson.put("operacao", operacao);
+     empresaJson.put("entidade", "empresa");
+     empresaJson.put("nome"    , empresa.getNome());
+     empresaJson.put("cnpj"     , empresa.getCnpj());      
+
+     return empresaJson.toJSONString();
+ }
     
     public Empresa converteJsonToEmpresa(String msg) throws ParseException {
         
@@ -60,10 +60,8 @@ public class Utils {
         empresa.setNome((String) json.get("nome"));  
         empresa.setCnpj((String) json.get("cnpj"));
         
-//        System.out.println("teste converteJsonToEmpresa: " + empresa.getNome());        
         return empresa;        
     }
-    
     
     public String retornaOperacao(String msg) throws ParseException {
         
@@ -72,7 +70,6 @@ public class Utils {
         jsonObject = (JSONObject) parser.parse(msg);
         
         String operacao = (String) jsonObject.get("operacao");
-//        System.out.println("Operacao controller: " + operacao);
         
         return operacao;
     }
@@ -84,7 +81,6 @@ public class Utils {
         jsonObject = (JSONObject) parser.parse(msg);
         
         String entidade = (String) jsonObject.get("entidade");
-//        System.out.println("Entidade controller: " + entidade);
         
         return entidade;
     }

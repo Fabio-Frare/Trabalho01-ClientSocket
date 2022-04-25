@@ -31,8 +31,10 @@ public class ControllerPessoa {
         msg    = utils.convertePessoaToJson(pessoa, "1");
         
         try {
-            SocketSpeaker ss = new SocketSpeaker(msg);
-            ss.call();
+            SocketSpeaker ss = SocketSpeaker.getInstance();
+            ss.setMensagem(msg);
+            String resposta = ss.call();
+            System.out.println(resposta);
         } catch (IOException ex) {
             Logger.getLogger(ControllerPessoa.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -67,7 +69,8 @@ public class ControllerPessoa {
             String msgListaEmpresa           = controlEmpresa.listarEmpresasMsg();
             
             try {
-                SocketSpeaker ss   = new SocketSpeaker(msgListaEmpresa);
+                SocketSpeaker ss = SocketSpeaker.getInstance();
+                ss.setMensagem(msgListaEmpresa);
                 String resposta    = ss.call();
                 String menuEmpresa = controlEmpresa.getMenuEmpresaByMsg(resposta);
                 
@@ -91,7 +94,8 @@ public class ControllerPessoa {
         String resposta = "";
         
         try {
-            SocketSpeaker ss = new SocketSpeaker(msg);
+            SocketSpeaker ss = SocketSpeaker.getInstance();
+            ss.setMensagem(msg);
             resposta         = ss.call();
         } catch (IOException ex) {
             Logger.getLogger(ControllerPessoa.class.getName()).log(Level.SEVERE, null, ex);
@@ -107,7 +111,8 @@ public class ControllerPessoa {
         msg = pessoaJson.toJSONString();
         
         try {
-            SocketSpeaker ss = new SocketSpeaker(msg);
+            SocketSpeaker ss = SocketSpeaker.getInstance();
+            ss.setMensagem(msg);
             String resposta  = ss.call();
             
             System.out.println(resposta);
@@ -125,7 +130,8 @@ public class ControllerPessoa {
         msg = empresaJson.toJSONString();
         
         try {
-            SocketSpeaker ss = new SocketSpeaker(msg);
+            SocketSpeaker ss = SocketSpeaker.getInstance();
+            ss.setMensagem(msg);
             String resposta  = ss.call();
             
             System.out.println(resposta);
@@ -151,7 +157,8 @@ public class ControllerPessoa {
         msg = pessoaJson.toJSONString();
         
         try {
-            SocketSpeaker ss = new SocketSpeaker(msg);
+            SocketSpeaker ss = SocketSpeaker.getInstance();
+            ss.setMensagem(msg);
             String resposta  = ss.call();
             
             System.out.println(resposta);
@@ -174,7 +181,8 @@ public class ControllerPessoa {
         msg    = utils.convertePessoaToJson(pessoa, "2");
         
         try {
-            SocketSpeaker ss = new SocketSpeaker(msg);
+            SocketSpeaker ss = SocketSpeaker.getInstance();
+            ss.setMensagem(msg);
             String resposta  = ss.call();
             
             System.out.println(resposta);

@@ -32,7 +32,8 @@ public class ControllerEmpresa {
         msg     = utils.converteEmpresaToJson(empresa, "1");
         
         try {
-            SocketSpeaker ss = new SocketSpeaker(msg);
+            SocketSpeaker ss = SocketSpeaker.getInstance();
+            ss.setMensagem(msg);
             String resposta  = ss.call();
             
             System.out.println(resposta);
@@ -44,7 +45,8 @@ public class ControllerEmpresa {
     public void listarEmpresas() {
         String msg = listarEmpresasMsg();
         try {
-            SocketSpeaker ss = new SocketSpeaker(msg);
+            SocketSpeaker ss = SocketSpeaker.getInstance();
+            ss.setMensagem(msg);
             String resposta  = ss.call();
             
             System.out.println(resposta);
@@ -69,7 +71,8 @@ public class ControllerEmpresa {
         msg = empresaJson.toJSONString();
         
         try {
-            SocketSpeaker ss = new SocketSpeaker(msg);
+            SocketSpeaker ss = SocketSpeaker.getInstance();
+            ss.setMensagem(msg);
             String resposta = ss.call();
             
             System.out.println(resposta);
@@ -89,7 +92,8 @@ public class ControllerEmpresa {
         msg = empresaJson.toJSONString();
         
         try {
-            SocketSpeaker ss = new SocketSpeaker(msg);
+            SocketSpeaker ss = SocketSpeaker.getInstance();
+            ss.setMensagem(msg);
             String resposta = ss.call();
             
             System.out.println(resposta);
@@ -141,7 +145,8 @@ public class ControllerEmpresa {
         msg = empresaJson.toJSONString();
         
         try {
-            SocketSpeaker ss = new SocketSpeaker(msg);
+            SocketSpeaker ss = SocketSpeaker.getInstance();
+            ss.setMensagem(msg);
             String resposta = ss.call();
             
             System.out.println(resposta);
@@ -157,7 +162,8 @@ public class ControllerEmpresa {
         msg     = utils.converteEmpresaToJson(empresa, "2");
         
         try {
-            SocketSpeaker ss = new SocketSpeaker(msg);
+            SocketSpeaker ss = SocketSpeaker.getInstance();
+            ss.setMensagem(msg);
             String resposta = ss.call();
             
             System.out.println(resposta);

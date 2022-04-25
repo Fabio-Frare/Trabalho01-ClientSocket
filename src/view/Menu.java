@@ -3,6 +3,7 @@ package view;
 import controller.ControllerEmpresa;
 import controller.ControllerPessoa;
 import java.util.Scanner;
+import utils.SocketSpeaker;
 
 
 /**
@@ -17,84 +18,78 @@ public class Menu {
     private static ControllerPessoa controllerPessoa;
     private static ControllerEmpresa controllerEmpresa;
     
-    public String menuIniciar() {
-        controllerPessoa  = new ControllerPessoa();      
-        controllerEmpresa = new ControllerEmpresa();
+    public void menuIniciar() {
         sc = new Scanner(System.in);
-        selecionaOperacao();
-        selecionaEntidade();        
         
-        String msg = "";
-        switch (operacao) {
-            case 1: // INSERT
-                if (entidade == 1) {
-                    controllerPessoa.inserirPessoa();
-//                    System.out.println("mensagem controller.inserirPessoa: " + msg);
-                }
-                if (entidade == 2) {
-                    controllerEmpresa.inserirEmpresa();
-//                    System.out.println("mensagem controller.inserirEmpresa: " + msg);
-                }  
-                break;
-            case 2: // UPDATE
-                if (entidade == 1) {
-                    controllerPessoa.atualizaPessoa();
-                }
-                if (entidade == 2) {
-                    controllerEmpresa.atualizaEmpresa();
-                }
-                break;
-            case 3: // GET
-                if (entidade == 1) {
-                    controllerPessoa.buscarPessoa();
-//                    System.out.println("mensagem controller.buscarPessoa: " + msg);
-                }
-                if (entidade == 2) {
-                    controllerEmpresa.buscarEmpresa();
-//                    System.out.println("mensagem controller.buscarEmpresa: " + msg);
-                }
-                break;
-            case 4: //DELETE
-                if (entidade == 1) {
-                    controllerPessoa.deletarPessoa();
-//                  System.out.println("mensagem controller.deletarPessoa: " + msg);
-                }
-                if (entidade == 2) {
-                    controllerEmpresa.deletarEmpresa();
-//                  System.out.println("mensagem controller.deletarEmpresa: " + msg);
-                }
-                break;
-            case 5: //LIST
-                if (entidade == 1) {
-                    controllerPessoa.listarPessoas();
-//                    System.out.println("mensagem controller.listarPessoa: " + msg);
-                }
-                if (entidade == 2) {
-                    controllerEmpresa.listarEmpresas();
-//                    System.out.println("mensagem controller.listarEmpresas: " + msg);
-                }
-                 if (entidade == 3) {
-                    msg = controllerEmpresa.listarTodos();
-                    System.out.println("mensagem controller.listarTodos: " + msg);
-                }
-                break;
-            case 6: //VINCULAR
-//                msg = controllerPessoa.vincularPessoa();                
-//                System.out.println("mensagem controller.vincular: " + msg);
-      
-                break;
-            case 7: // SAIR DA APLICAÇÃO
-                System.out.println("Você optou por sair da aplicação.");
-                sc.close();
-                System.exit(0);
-                break;
-            default:
-                System.out.println("Opção inválida.");
-                menuIniciar();
-                break;
-        }  
-//        sc.close();
-        return msg;
+        System.out.println("Indique o caminho da aplicação servidor (endereço-porta)\n"
+                         + "Informe o endereço:");
+        String address = sc.nextLine();
+        System.out.println("Informe a porta");
+        int port = sc.nextInt();
+        
+        SocketSpeaker.getInstance().init(address, port);
+        
+        while(true){
+            controllerPessoa  = new ControllerPessoa();      
+            controllerEmpresa = new ControllerEmpresa();
+            selecionaOperacao();
+            selecionaEntidade();        
+
+            switch (operacao) {
+                case 1: // INSERT
+                    if (entidade == 1) {
+                        controllerPessoa.inserirPessoa();
+                    }
+                    if (entidade == 2) {
+                        controllerEmpresa.inserirEmpresa();
+                    }  
+                    break;
+                case 2: // UPDATE
+                    if (entidade == 1) {
+                        controllerPessoa.atualizaPessoa();
+                    }
+                    if (entidade == 2) {
+                        controllerEmpresa.atualizaEmpresa();
+                    }
+                    break;
+                case 3: // GET
+                    if (entidade == 1) {
+                        controllerPessoa.buscarPessoa();
+                    }
+                    if (entidade == 2) {
+                        controllerEmpresa.buscarEmpresa();
+                    }
+                    break;
+                case 4: //DELETE
+                    if (entidade == 1) {
+                        controllerPessoa.deletarPessoa();
+                    }
+                    if (entidade == 2) {
+                        controllerEmpresa.deletarEmpresa();
+                    }
+                    break;
+                case 5: //LIST
+                    if (entidade == 1) {
+                        controllerPessoa.listarPessoas();
+                    }
+                    if (entidade == 2) {
+                        controllerEmpresa.listarEmpresas();
+                    }
+                     if (entidade == 3) {
+                        controllerEmpresa.listarTodos();
+                    }
+                    break;
+                case 7: // SAIR DA APLICAÇÃO
+                    System.out.println("Você optou por sair da aplicação.");
+                    sc.close();
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Opção inválida.");
+                    menuIniciar();
+                    break;
+            }
+        }
     }
     
    private void selecionaOperacao() { 
@@ -104,23 +99,22 @@ public class Menu {
                 + "\n3 - Buscar"
                 + "\n4 - Deletar"
                 + "\n5 - Listar"
-                + "\n6 - Vincular"
                 + "\n7 - sair");
         operacao = sc.nextInt();
-//        sc.close();
-   } 
-   
-   private void selecionaEntidade() {
-       if(operacao < 6) { // while
-            String[] operacoes = {"inserir", "atualizar", "buscar", "deletar", "listar"};
-            System.out.println("Selecione a entidade que você deseja " + operacoes[operacao - 1] + ": "
-                + "\n1 - Pessoa"
-                + "\n2 - Empresa"
-                + "\n3 - Todos");
-            entidade = sc.nextInt();
-       }  
-//       sc.close();
    }
 
-    
+   private void selecionaEntidade(){
+        if(operacao <= 5){
+            String[] operacoes  = {"inserir", "atualizar", "buscar", "deletar", "listar"};
+            String menuEntidade = "Selecione a entidade que você deseja " + operacoes[operacao - 1] + ": "
+                                + "\n1 - Pessoa"
+                                + "\n2 - Empresa";
+            if(operacao == 5){
+                menuEntidade += "\n3 - Todos";
+            }
+            
+            System.out.println(menuEntidade);
+            entidade = sc.nextInt();
+        }
+   }
 }
